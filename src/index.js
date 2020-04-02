@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store/store';
 import './common-styles/index.scss';
 import './common-styles/headers/headers.scss';
+import './common-styles/text/text.scss';
 
 const app = (
     <Provider store={store}>
