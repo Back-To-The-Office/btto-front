@@ -1,0 +1,17 @@
+.description-text {
+    color: #5C5C5C;
+    font-size: 16px;
+    line-height: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.description-text--center {
+    text-align: center;
+}
+
+.description-text__link {
+    color: #2979FF;
+    &:hover {
+        text-decoration: underline;
+    }
+}

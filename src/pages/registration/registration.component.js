@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import is from 'is_js';
 import './registration.styles.scss';
 import { connect } from 'react-redux';
-import { register } from '../../redux/auth/auth';
+import { register } from '../../redux/registration/registration.actions';
 import { ReactComponent as RegisterImage } from '../../assets/registration.svg';
+import { InputAdornment, IconButton, FormHelperText } from '@material-ui/core';
 
 const checkPassword = password => {
     let passExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
@@ -59,12 +65,12 @@ class Registration extends Component {
                 }
             },
             password: {
-                type: 'password',
                 value: '',
                 label: 'Password',
                 isTouched: false,
                 isValid: false,
-                errorMessage: 'Please enter a valid password',
+                isDisplay: false,
+                errorMessage: 'The password should be 6 to 20 characters long, must contain uppercase and lowercase letters and numbers.',
                 validation: {
                     isRequired: true, 
                     isPassword: true
@@ -116,36 +122,82 @@ class Registration extends Component {
         return isValid
     }
 
-    handleCheckbox = () => {
-        this.setState({
-            privacyTerm: {
-                ...this.state.privacyTerm,
-                isChecked: !this.state.privacyTerm.isChecked
-            }
-        });
-
-        const { fields } = this.state;
-
-        let isFormValid = true;
-
-        Object.keys(fields).forEach(fieldName => {
-            isFormValid = fields[fieldName].isValid === true && isFormValid && this.state.privacyTerm.isChecked;
-        })
-    }
-
     handleSubmit = event => {
         event.preventDefault();
     }
 
     handleRegister = () => {
         const { firstName, lastName, email, password } = this.state.fields;
-
-        this.props.register(
+        const { register, history } = this.props;
+        register(
             firstName.value,
             lastName.value,
             email.value,
             password.value
         )
+        history.push('/verification');
+    }
+
+    handleClickShowPassword = () => {
+        this.setState({
+            ...this.state,
+            fields: {
+                ...this.state.fields,
+                password: {
+                    ...this.state.fields.password,
+                    isDisplay: !this.state.fields.password.isDisplay
+                }
+            }
+        })
+    }
+
+    handleMouseDownPassword = event => {
+        event.preventDefault()
+    }
+
+    renderFields = (fieldName, index) => {
+        const field = this.state.fields[fieldName];
+        const { type, value, label, errorMessage, isValid, isTouched, isDisplay, validation } = field;
+        if (fieldName !== "password") {
+            return (
+                <TextField
+                    type={type}
+                    value={value} 
+                    key={index}
+                    required={validation.isRequired}
+                    error={!isValid && isTouched}
+                    label={label}
+                    helperText={isValid || !isTouched ? '' : errorMessage}
+                    variant='outlined'
+                    onChange={this.handleChange(fieldName)}
+                />
+            )
+        } else {
+            return (
+                <FormControl error={!isValid && isTouched} variant='outlined' key={index}>
+                    <InputLabel required={validation.isRequired} htmlFor='password-field'>Password</InputLabel>
+                    <OutlinedInput
+                        label="Password *"
+                        id='password-field'
+                        type={isDisplay ? 'text' : 'password'}
+                        value={value}
+                        onChange={this.handleChange(fieldName)}
+                        endAdornment={
+                            <InputAdornment position='end'>
+                                <IconButton
+                                    aria-label='toggle password visivility'
+                                    onClick={this.handleClickShowPassword}
+                                    onMouseDown={this.handleMouseDownPassword}
+                                >
+                                    {isDisplay ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+                    <FormHelperText>{isValid || !isTouched ? '' : errorMessage}</FormHelperText>
+                </FormControl>
+            )
+        }
     }
 
     render() {
@@ -156,29 +208,12 @@ class Registration extends Component {
                         <div className="registration-content__left">
                             <h1 className="section-header">Registration</h1>
                             <form className="registration-form" onSubmit={this.handleSubmit}>
-                                {Object.keys(this.state.fields).map((fieldName, index) => {
-                                    const field = this.state.fields[fieldName];
-                                    const { type, value, label, errorMessage, isValid, isTouched, validation } = field;
-                                    return (
-                                        <TextField
-                                            type={type}
-                                            value={value} 
-                                            key={index}
-                                            required={validation.isRequired}
-                                            error={!isValid && isTouched}
-                                            label={label}
-                                            helperText={isValid || !isTouched ? '' : errorMessage}
-                                            variant='outlined'
-                                            onChange={this.handleChange(fieldName)}
-                                        />
-                                    )
-                                })}
-                                <p className="user-agreement">
-                                    By signing up, I agree to the Back To the Office <a target="_blank" className="user-agreement__link" href="#">Privacy Policy</a> and <a target="_blank" className="user-agreement__link" href="#">Terms of Service.</a>
+                                {Object.keys(this.state.fields).map((fieldName, index) => this.renderFields(fieldName, index))}
+                                <p className="description-text">
+                                    By signing up, I agree to the Back To the Office <a target="_blank" className="description-text__link" href="#">Privacy Policy</a> and <a target="_blank" className="description-text__link" href="#">Terms of Service.</a>
                                 </p>
                                 <Button 
                                     variant='outlined'
-                                    color='#00E676'
                                     disabled={this.state.isFormValid ? false : true}
                                     onClick={this.handleRegister}
                                     size="large"
