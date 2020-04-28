@@ -18,10 +18,9 @@ const App = () => {
     return (
         <Fragment>
             <Switch>
-                <Route exact path="/" component={MainPage} />
+                <Route path='/' component = {TeamPage} />
                 <Route path='/registration' component={Registration} />
                 <Route path='/verification' component={Verification} />
-                <Route path='/team' component = {TeamPage} />
             </Switch>
         </Fragment>
     )
