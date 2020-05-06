@@ -23,7 +23,7 @@ const users = [
         role: 'Frontend',
         img: 'https://img1.looper.com/img/gallery/audi-may-have-spoiled-who-saves-tony-stark-in-avengers-4/intro-1547480934.jpg',
         isOnline: true,
-        workTime: [[8, 12], [14, 17]]
+        workTime: [[4, 7], [9, 12]]
     },
     {
         id: 3,
@@ -33,27 +33,7 @@ const users = [
         role: 'Frontend',
         img: 'https://img1.looper.com/img/gallery/audi-may-have-spoiled-who-saves-tony-stark-in-avengers-4/intro-1547480934.jpg',
         isOnline: true,
-        workTime: [[8, 12], [14, 17]]
-    },
-    {
-        id: 4,
-        timezone: 0,
-        name: 'Andrey Nagoev',
-        geo: 'Moscow, Russian Federation',
-        role: 'Frontend',
-        img: 'https://img1.looper.com/img/gallery/audi-may-have-spoiled-who-saves-tony-stark-in-avengers-4/intro-1547480934.jpg',
-        isOnline: true,
-        workTime: [[8, 12], [14, 17]]
-    },
-    {
-        id: 5,
-        timezone: 0,
-        name: 'Andrey Nagoev',
-        geo: 'Moscow, Russian Federation',
-        role: 'Frontend',
-        img: 'https://img1.looper.com/img/gallery/audi-may-have-spoiled-who-saves-tony-stark-in-avengers-4/intro-1547480934.jpg',
-        isOnline: true,
-        workTime: [[8, 12], [14, 17]]
+        workTime: [[8, 12]]
     }
 ]
 

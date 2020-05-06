@@ -1,6 +1,8 @@
 import React from 'react';
 import { TimeCellWrapper, TimeCellFragment, WorkTime } from './time-cell.styles';
 import TableCell from '../table-cell/table-cell.component';
+import { useDispatch, useSelector } from 'react-redux';
+import { pickUser } from '../../../redux/worktime-display/worktime-display.actions';
 
 const checkTimeIsWorkTime = (time, workTime) => {
     for (let workPeriod of workTime) {
@@ -11,16 +13,26 @@ const checkTimeIsWorkTime = (time, workTime) => {
     return false;
 }
 
-const TeamTableTimeCell = ( { offsetTime, workTime } ) => {
+const TeamTableTimeCell = ( { offsetTime, workTime, offset } ) => {
+    const pickedUser = useSelector(state => state.worktimeDisplay),
+          dispatch = useDispatch(),
+          normalTime = [...Array(24).keys()];
+    const { pickedWorkTime, pickedTimezone } = pickedUser;
     return (
-        <TableCell>
+        <TableCell onClick={() => dispatch(pickUser({
+            pickedWorkTime: workTime,
+            pickedTimezone: offset
+        }))}>
             <TimeCellWrapper>
-                {offsetTime.map(time => (
-                    <TimeCellFragment key={time}>
-                        <p>{time}</p>
-                        <WorkTime isWorkTime={checkTimeIsWorkTime(time, workTime)} />
-                    </TimeCellFragment>
-                ))}
+                {offsetTime.map(time => { 
+                    const offsetIndex = -(pickedTimezone - offset);
+                    return (
+                        <TimeCellFragment isPickedTime={pickedWorkTime.length ? checkTimeIsWorkTime(normalTime[time] + offsetIndex, pickedWorkTime) : true} key={time}>
+                            <p>{time}</p>
+                            <WorkTime isWorkTime={checkTimeIsWorkTime(time, workTime)} />
+                        </TimeCellFragment>
+                    )
+                })}
             </TimeCellWrapper>
         </TableCell>
     )
