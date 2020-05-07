@@ -10,7 +10,7 @@ const TeamCircle = ( { users } ) => (
             {users.map((user, index) => {
                 const degree = getUserDegree(users.length, index);
                 return (
-                    <CircleItem key={user.id} degree={degree}>
+                    <CircleItem key={user.id} degree={degree} radius={users.length * 25}>
                         <CircleInner degree={degree}>
                             <UserAvatar user={user} />
                         </CircleInner>

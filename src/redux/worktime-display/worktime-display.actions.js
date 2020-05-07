@@ -11,7 +11,6 @@ export const pickUser = userInfo => (dispatch, getState) => {
     }
 } 
 
-
 const setUserWorktime = userInfo => ({
     type: SET_USER_WORKTIME,
     payload: userInfo

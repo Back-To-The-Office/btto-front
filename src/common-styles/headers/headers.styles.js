@@ -1,5 +1,20 @@
 import styled from 'styled-components';
-import { BTTO_GREY } from '../vars';
+import { BTTO_GREY, BTTO_BLUE } from '../vars';
+
+export const SectionHeader = styled.h1`
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: ${BTTO_GREY};
+    line-height: 3.75rem;
+    margin: 0 0 120px;
+`
+
+export const SectionSubHeader = styled.h5`
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    color: ${BTTO_BLUE};
+`
 
 export const UserHeader = styled.h5`
     font-size: 1rem;

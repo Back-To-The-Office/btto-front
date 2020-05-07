@@ -4,6 +4,7 @@ import { BTTO_BLUE } from '../../../common-styles/vars';
 import { DrawerContent } from './drawer.styles';
 import DrawerAvatar from '../drawer-avatar/drawer-avatar.component';
 import DrawerButton from '../drawer-button/drawer-button.component';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
     drawer: {
@@ -34,8 +35,9 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const DrawerComponent = ( { isOpen, user, toggleDrawer } ) => {
+const DrawerComponent = ( { isOpen, toggleDrawer } ) => {
     const classes = useStyles();
+    const user = useSelector(state => state.auth.user);
     return (
         <Drawer
             variant="permanent"
