@@ -11,7 +11,7 @@ const TeamTableRow = ( { user, mainUserTimezone } ) => {
     return (
         <TableRow>
             <UserCell user={user} />
-            <TimeCell offsetTime={offsetTime} workTime={workTime} />
+            <TimeCell offsetTime={offsetTime} workTime={workTime} offset={timezone / 60} />
         </TableRow>
     )
 }
