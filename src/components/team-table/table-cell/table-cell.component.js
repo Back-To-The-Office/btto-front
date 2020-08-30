@@ -5,7 +5,9 @@ const CustomTableCell = withStyles({
         backgroundColor: '#fff',
         border: 'none',
         padding: 0,
-        verticalAlign: 'top'
+        marginRight: 'auto',
+        verticalAlign: 'top',
+        position: 'relative'
     }
 })(TableCell)
 

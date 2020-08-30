@@ -6,7 +6,7 @@ import MainPage from './pages/MainPage/MainPage';
 import { autoLogin } from './redux/auth/auth.actions';
 import { useDispatch } from 'react-redux';
 import Verification from './pages/verification/verification.component';
-import TeamPage from './pages/team/team.page';
+import Workspace from './pages/workspace/workspace.component';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const App = () => {
     return (
         <Fragment>
             <Switch>
-                <Route path='/' component = {TeamPage} />
+                <Route path='/workspace' component={Workspace} />
                 <Route path='/registration' component={Registration} />
                 <Route path='/verification' component={Verification} />
             </Switch>

@@ -3,11 +3,11 @@ import TeamCircle from '../../../../components/team-circle/team-circle.component
 import { TeamContent } from './team.styles';
 import { SectionHeader, SectionSubHeader } from '../../../../common-styles/headers/headers.styles';
 
-const Team = ( { teamName, users } ) => (
+const Team = ( { teamName, members } ) => (
     <TeamContent>
         <SectionSubHeader>The Team</SectionSubHeader>
         <SectionHeader>{teamName}</SectionHeader>
-        <TeamCircle users={users} />
+        <TeamCircle members={members} />
     </TeamContent>
 )
 

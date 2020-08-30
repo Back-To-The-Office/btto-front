@@ -4,15 +4,15 @@ import UserAvatar from '../UI/user-avatar/user-avatar.component';
 
 const getUserDegree = (numbersOfItems, indexOfItem) => 360 / numbersOfItems * indexOfItem;
 
-const TeamCircle = ( { users } ) => (
+const TeamCircle = ( { members } ) => (
     <TeamCircleContent>
         <Circle>
-            {users.map((user, index) => {
-                const degree = getUserDegree(users.length, index);
+            {Object.keys(members).map((member, index) => {
+                const degree = getUserDegree(Object.keys(members).length, index);
                 return (
-                    <CircleItem key={user.id} degree={degree} radius={users.length * 25}>
+                    <CircleItem key={members[member].id} degree={degree} radius={Object.keys(members).length * 25}>
                         <CircleInner degree={degree}>
-                            <UserAvatar user={user} />
+                            <UserAvatar user={members[member]} />
                         </CircleInner>
                     </CircleItem>
                 )

@@ -2,14 +2,16 @@ import { AUTH_LOGOUT, AUTH_SUCCESS } from './auth.actions-types';
 
 const INITIAL_STATE = {
     user: {
-        id: 1,
-        timezone: 0,
-        name: 'Ester Jones',
-        geo: 'London, United Kingdom',
-        role: 'Manager',
-        img: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Jessica_Ennis_%28May_2010%29_cropped.jpg',
+        id: 'ironMan',
+        timezone: 240,
+        name: 'Anthony Stark',
+        geo: 'New York, USA',
+        role: 'Co-Founder "Shield" initiative',
+        img: 'https://i.pinimg.com/originals/f0/d3/f9/f0d3f9063896bd44631cb386ebdfd914.jpg',
         isOnline: true,
-        workTime: [[9, 16]]
+        workTime: [[10, 14], [16, 23]],
+        teams: [{id: 'avengers', name: 'Avengers'}, {id: 'asdasdd232312dasdsa', name: 'Avengurs'}],
+        company: {id: 'marvel', name: 'Marvel'}
     },
     token: null
 }

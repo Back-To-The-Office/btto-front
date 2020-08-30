@@ -4,22 +4,18 @@ import { useSelector } from 'react-redux';
 import { TimezonesContent } from './timezones.styles';
 import { SectionHeader } from '../../../../common-styles/headers/headers.styles';
 
-const removeMainUser = (mainUser, array) => {
-    const mainUserIndex = array.findIndex(user => user.id === mainUser.id);
-    if (mainUserIndex === -1) {
-        return array
-    } else {
-        array.splice(mainUserIndex, 1);
-        return array
-    }
+const removeUser = (user, members) => {
+    delete members[user.id]
+    return members
 }
 
-const Timezones = ( { users } ) => {
-    const mainUser = useSelector(state => state.auth.user);
+const Timezones = ( { members } ) => {
+    const user = useSelector(state => state.auth.user);
+    const teamMembersCopy = JSON.parse(JSON.stringify(members))
     return (
         <TimezonesContent>
             <SectionHeader>Time Zones and Work Hours</SectionHeader>
-            <TeamTable mainUser={mainUser} otherUsers={removeMainUser(mainUser, users)} />
+            <TeamTable user={user} members={removeUser(user, teamMembersCopy)} />
         </TimezonesContent>
     )
 }
