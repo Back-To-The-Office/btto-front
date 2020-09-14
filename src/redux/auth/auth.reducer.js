@@ -3,7 +3,7 @@ import { AUTH_LOGOUT, AUTH_SUCCESS } from './auth.actions-types';
 const INITIAL_STATE = {
     user: {
         id: 'ironMan',
-        timezone: 240,
+        timezone: "America/New_York",
         name: 'Anthony Stark',
         geo: 'New York, USA',
         role: 'Co-Founder "Shield" initiative',

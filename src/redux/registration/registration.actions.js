@@ -1,26 +1,20 @@
 import axios from 'axios';
-import { REGISTRATION_SUCCESS } from './registration.actions-types';
-import { authUser, authSuccess, autoLogout } from '../auth/auth.actions';
+import moment from 'moment-timezone';
+import {REGISTRATION_SUCCESS} from './registration.actions-types';
 
-export const register = (firstName, lastName, email, password) => async dispatch => {
-
+export const register = (firstName, lastName, position, email, password) => async dispatch => {
+    const timezone = moment.tz.guess();
     const registerData = {
-        firstName, lastName, email, password
+        email, firstName, lastName, password, timezone
     }
 
-    // const registerUrl = 'blabla.com';
-
-    // const response = await axios.post(registerUrl, registerData)
-    const data = {
-        idToken: '123456',
-        expiresIn: 1000
+    const registerUrl = 'https://btto-back.herokuapp.com/api/v1/users/register';
+    try {
+        const response = await axios.post(registerUrl, registerData)
+        dispatch(registrationSuccess(response.data));
+    } catch (error) {
+        throw error
     }
-    dispatch(registrationSuccess(registerData));
-
-    authUser(data);
-    dispatch(authSuccess(data.idToken));
-    dispatch(autoLogout(data.expiresIn));
-    
 }
 
 export const registrationSuccess = registerData => {

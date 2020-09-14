@@ -11,11 +11,11 @@ export const pickUser = userInfo => (dispatch, getState) => {
     }
 } 
 
-const setUserWorktime = userInfo => ({
+export const setUserWorktime = (workTime, offset) => ({
     type: SET_USER_WORKTIME,
-    payload: userInfo
+    payload: {workTime, offset}
 });
 
-const clearUserWorktime = () => ({
+export const clearUserWorktime = () => ({
     type: CLEAR_USER_WORKTIME
 })

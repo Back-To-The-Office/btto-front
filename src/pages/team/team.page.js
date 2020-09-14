@@ -37,7 +37,7 @@ class TeamPage extends Component {
                     <LoadingSpinner /> : 
                     <Fragment>
                         <Team teamName={name} members={members} />
-                        <TimezoneSection members={members} />
+                        <TimezoneSection usersObject={members} />
                     </Fragment>
                 }
             </TeamPageContent>

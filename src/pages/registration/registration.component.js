@@ -1,26 +1,13 @@
 import React, { Component } from 'react';
-import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import Button from '@material-ui/core/Button';
-import is from 'is_js';
+import {TextField, Button} from '@material-ui/core';
+import PasswordField from './password-field/password-field.component';
+import SelectField from './select-field/select-field.component';
 import './registration.styles.scss';
-import { connect } from 'react-redux';
-import { register } from '../../redux/registration/registration.actions';
-import { ReactComponent as RegisterImage } from '../../assets/registration.svg';
-import { InputAdornment, IconButton, FormHelperText } from '@material-ui/core';
-
-const checkPassword = password => {
-    let passExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-    if (password.match(passExp)) {
-        return true
-    } else {
-        return false
-    }
-}
+import {connect} from 'react-redux';
+import {register} from '../../redux/registration/registration.actions';
+import {ReactComponent as RegisterImage} from '../../assets/registration.svg';
+import moment from 'moment-timezone';
+import {checkFieldIsValid} from '../../frameworks/registration/registration.framework';
 
 class Registration extends Component {
     state = {
@@ -32,10 +19,11 @@ class Registration extends Component {
         fields: {
             firstName: {
                 type: 'text',
-                value: '',
+                value: 'd',
                 label: 'First name',
                 isTouched: false,
                 isValid: false,
+                placeholder: 'Alex',
                 errorMessage: 'This field is required',
                 validation: {
                     isRequired: true
@@ -43,10 +31,23 @@ class Registration extends Component {
             },
             lastName: {
                 type: 'text',
-                value: '',
+                value: 'd',
                 label: 'Last name',
                 isTouched: false,
                 isValid: false,
+                placeholder: 'Mitchell',
+                errorMessage: 'This field is required',
+                validation: {
+                    isRequired: true
+                }
+            },
+            position: {
+                type: 'text',
+                value: 'd',
+                label: 'Position',
+                isTouched: false,
+                isValid: false,
+                placeholder: 'Manager',
                 errorMessage: 'This field is required',
                 validation: {
                     isRequired: true
@@ -54,10 +55,11 @@ class Registration extends Component {
             },
             email: {
                 type: 'email',
-                value: '',
+                value: 'qwe@mail.r',
                 label: 'Email',
                 isTouched: false,
                 isValid: false,
+                placeholder: 'yourmail@gmail.com',
                 errorMessage: 'Please enter a valid email',
                 validation: {
                     isRequired: true,
@@ -65,17 +67,30 @@ class Registration extends Component {
                 }
             },
             password: {
-                value: '',
+                type: 'password',
+                value: 'qwer1234T',
                 label: 'Password',
                 isTouched: false,
                 isValid: false,
-                isDisplay: false,
+                placeholder: '',
                 errorMessage: 'The password should be 6 to 20 characters long, must contain uppercase and lowercase letters and numbers.',
                 validation: {
                     isRequired: true, 
                     isPassword: true
                 }
-            }
+            },
+
+            // timezone: {
+            //     type: 'select',
+            //     value: moment.tz.guess(),
+            //     label: 'Timezone',
+            //     isTouched: false,
+            //     isValid: false,
+            //     errorMessage: 'This field is required',
+            //     validation: {
+            //         isRequired: true
+            //     }
+            // }
         }
     }
 
@@ -86,10 +101,9 @@ class Registration extends Component {
 
         field.value = value;
         field.isTouched = true;
-        field.isValid = this.checkValid(value, field);
+        field.isValid = checkFieldIsValid(value, field);
 
         fields[input] = field;
-
         let isFormValid = true;
 
         Object.keys(fields).forEach(fieldName => {
@@ -101,52 +115,28 @@ class Registration extends Component {
         })
     }
 
-    checkValid = (value, field) => {
-
-        const { isRequired, isEmail, isPassword } = field.validation;
-
-        let isValid = true;
-
-        if (isRequired) {
-            isValid = value.trim() !== '' && isValid;
-          }
-
-        if (isEmail) {
-            isValid = is.email(value) && isValid;
-        }
-
-        if (isPassword) {
-            isValid = checkPassword(value) && isValid;
-        }
-
-        return isValid
-    }
-
-    handleSubmit = event => {
-        event.preventDefault();
-    }
-
     handleRegister = () => {
-        const { firstName, lastName, email, password } = this.state.fields;
+        const { firstName, lastName, position, email, password } = this.state.fields;
         const { register, history } = this.props;
+        console.log(password.value)
         register(
             firstName.value,
             lastName.value,
+            position.value,
             email.value,
             password.value
         )
-        history.push('/verification');
+        // history.push('/verification');
     }
 
     handleClickShowPassword = () => {
+        const password = {...this.state.fields.password};
+        password.isDisplay = !password.isDisplay;
         this.setState({
             ...this.state,
             fields: {
                 ...this.state.fields,
-                password: {
-                    ...this.state.fields.password,
-                    isDisplay: !this.state.fields.password.isDisplay
-                }
+                password
             }
         })
     }
@@ -157,46 +147,49 @@ class Registration extends Component {
 
     renderFields = (fieldName, index) => {
         const field = this.state.fields[fieldName];
-        const { type, value, label, errorMessage, isValid, isTouched, isDisplay, validation } = field;
-        if (fieldName !== "password") {
-            return (
-                <TextField
-                    type={type}
-                    value={value} 
-                    key={index}
-                    required={validation.isRequired}
-                    error={!isValid && isTouched}
-                    label={label}
-                    helperText={isValid || !isTouched ? '' : errorMessage}
-                    variant='outlined'
-                    onChange={this.handleChange(fieldName)}
-                />
-            )
-        } else {
-            return (
-                <FormControl error={!isValid && isTouched} variant='outlined' key={index}>
-                    <InputLabel required={validation.isRequired} htmlFor='password-field'>Password</InputLabel>
-                    <OutlinedInput
-                        label="Password *"
-                        id='password-field'
-                        type={isDisplay ? 'text' : 'password'}
-                        value={value}
+        const { type, value, label, errorMessage, isValid, isTouched, validation, placeholder } = field;
+        switch (type) {
+            case 'text':
+            case 'email':
+                return (
+                    <TextField
+                        type={type}
+                        value={value} 
+                        key={index}
+                        placeholder={placeholder}
+                        required={validation.isRequired}
+                        error={!isValid && isTouched}
+                        label={label}
+                        helperText={isValid || !isTouched ? '' : errorMessage}
+                        variant='outlined'
                         onChange={this.handleChange(fieldName)}
-                        endAdornment={
-                            <InputAdornment position='end'>
-                                <IconButton
-                                    aria-label='toggle password visivility'
-                                    onClick={this.handleClickShowPassword}
-                                    onMouseDown={this.handleMouseDownPassword}
-                                >
-                                    {isDisplay ? <Visibility /> : <VisibilityOff />}
-                                </IconButton>
-                            </InputAdornment>
-                        }
                     />
-                    <FormHelperText>{isValid || !isTouched ? '' : errorMessage}</FormHelperText>
-                </FormControl>
-            )
+                )
+            case 'password':
+                return (
+                    <PasswordField
+                        label={label}
+                        value={value}
+                        key={index}
+                        validation={validation}
+                        isValid={isValid}
+                        isTouched={isTouched}
+                        errorMessage={errorMessage}
+                        handleChange={this.handleChange(fieldName)}
+                    />
+                )
+            // case 'select':
+            //     return (
+            //         <SelectField
+            //             key={index}
+            //             label={label}
+            //             value={value}
+            //             handleChange={this.handleChange(fieldName)}
+            //             options={moment.tz.names()}
+            //         />
+            //     )
+            default:
+                break;
         }
     }
 
@@ -207,7 +200,7 @@ class Registration extends Component {
                     <div className="registration-content">
                         <div className="registration-content__left">
                             <h1 className="section-header">Registration</h1>
-                            <form className="registration-form" onSubmit={this.handleSubmit}>
+                            <form className="registration-form">
                                 {Object.keys(this.state.fields).map((fieldName, index) => this.renderFields(fieldName, index))}
                                 <p className="description-text">
                                     By signing up, I agree to the Back To the Office <a target="_blank" className="description-text__link" href="#">Privacy Policy</a> and <a target="_blank" className="description-text__link" href="#">Terms of Service.</a>
@@ -218,7 +211,7 @@ class Registration extends Component {
                                     onClick={this.handleRegister}
                                     size="large"
                                 >
-                                    Register >
+                                    Register
                                 </Button>
                             </form>
                         </div>
@@ -234,7 +227,7 @@ class Registration extends Component {
 
 const mapDispatchToProps = dispatch => (
     {
-        register: (firstName, lastName, email, password) => dispatch(register(firstName, lastName, email, password))
+        register: (firstName, lastName, position, email, password) => dispatch(register(firstName, lastName, position, email, password))
     }
 )
 

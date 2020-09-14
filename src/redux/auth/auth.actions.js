@@ -5,8 +5,15 @@ export const auth = (email, password) => async dispatch => {
     const authData = {
         email, password
     }
-    // const url = 'asdas';
-    // const response = axios.post(url, authData);
+    const loginUrl = 'asdas';
+    try {
+        const response = axios.post(loginUrl, authData);
+        authUser(response.data);
+        dispatch(authSuccess(response.data.idToken));
+        dispatch(autoLogout(response.data.expiresIn));
+    } catch (error) {
+        throw error
+    }
     const data = {
         idToken: 'asdasd',
         expiresIn: 1000

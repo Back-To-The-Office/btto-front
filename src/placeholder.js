@@ -1,6 +1,6 @@
 const ironMan = {
     id: 'ironMan',
-    timezone: 240,
+    timezone: "America/New_York",
     name: 'Anthony Stark',
     geo: 'New York, USA',
     role: 'Co-Founder "Shield" initiative',
@@ -11,7 +11,7 @@ const ironMan = {
 
 const thor = {
     id: 'thor',
-    timezone: 0,
+    timezone: 'Europe/London',
     name: 'Thor',
     geo: 'Asgard',
     role: 'God of Asgard',
@@ -22,7 +22,7 @@ const thor = {
 
 const blackWidow = {
     id: 'blackWidow',
-    timezone: -180,
+    timezone: 'Europe/Moscow',
     name: 'Natasha Romanova',
     geo: 'Moscow',
     role: 'Spy',
@@ -33,7 +33,7 @@ const blackWidow = {
 
 const hulk = {
     id: 'hulk',
-    timezone: 240,
+    timezone: "America/New_York",
     name: 'Bruce Banner',
     geo: 'New York, USA',
     role: 'Gamma rays scientist',
@@ -44,7 +44,7 @@ const hulk = {
 
 const spiderMan = {
     id: 'spiderMan',
-    timezone: 240,
+    timezone: "America/New_York",
     name: 'Peter Parker',
     geo: 'New York, USA',
     role: 'Student',
@@ -55,7 +55,7 @@ const spiderMan = {
 
 const captainAmerica = {
     id: 'captainAmerica',
-    timezone: 240,
+    timezone: "America/New_York",
     name: 'Steven Rogers',
     geo: 'New York, USA',
     role: 'Super Soldier',
@@ -66,7 +66,7 @@ const captainAmerica = {
 
 const hawkeye = {
     id: 'hawkeye',
-    timezone: 240,
+    timezone: "America/New_York",
     name: 'Clint Barton',
     geo: 'New York, USA',
     role: 'Archer',
@@ -77,7 +77,7 @@ const hawkeye = {
 
 const vision = {
     id: 'vision',
-    timezone: 240,
+    timezone: "America/New_York",
     name: 'Vision',
     geo: 'New York, USA',
     role: 'Android',
@@ -104,7 +104,7 @@ const avengers = {
 const avengurs = {
     id: 'asdasdd232312dasdsa',
     name: 'Avengurs',
-    members: {
+    usersObject: {
         'thor': thor, 
         'blackWindow': blackWidow, 
         'hulk': hulk, 
