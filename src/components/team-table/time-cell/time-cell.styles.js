@@ -13,6 +13,7 @@ export const TimeCellAfterElement = css`
         background-color: rgba(55, 71, 79, 0.5);
         width: 100%;
         height: 100%;
+        transition: 50ms all linear;
     }
 `
 
@@ -22,7 +23,10 @@ export const TimeCellFragment = styled.div`
     position: relative;
     align-items: center;
     padding-bottom: 25px;
-    ${props => !props.isPickedTime ? TimeCellAfterElement : ''}
+    &::after {
+        ${props => !props.isPickedTime ? "opacity: 100%;" : "opacity: 0;"}
+    }
+    ${TimeCellAfterElement}
 `
 
 export const WorkTime = styled.div`

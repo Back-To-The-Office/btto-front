@@ -6,7 +6,7 @@ const ironMan = {
     role: 'Co-Founder "Shield" initiative',
     img: 'https://i.pinimg.com/originals/f0/d3/f9/f0d3f9063896bd44631cb386ebdfd914.jpg',
     isOnline: true,
-    workTime: [[10, 15], [16, 23]]
+    workTime: [[10, 14], [16, 23]]
 }
 
 const thor = {

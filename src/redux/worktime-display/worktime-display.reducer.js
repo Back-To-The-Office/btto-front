@@ -2,7 +2,7 @@ import { SET_USER_WORKTIME, CLEAR_USER_WORKTIME } from './worktime-display.actio
 
 export const INITIAL_STATE = {
     pickedWorkTime: [],
-    pickedTimezone: 0
+    pickedTimezone: ''
 }
 
 const worktimeDisplayReducer = (state=INITIAL_STATE, action) => {

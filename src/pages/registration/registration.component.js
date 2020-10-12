@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {TextField, Button} from '@material-ui/core';
-import PasswordField from './password-field/password-field.component';
+import PasswordField from '../../components/UI/password-field/password-field.component';
 import SelectField from './select-field/select-field.component';
 import './registration.styles.scss';
 import {connect} from 'react-redux';
 import {register} from '../../redux/registration/registration.actions';
 import {ReactComponent as RegisterImage} from '../../assets/registration.svg';
-import moment from 'moment-timezone';
 import {checkFieldIsValid} from '../../frameworks/registration/registration.framework';
 
 class Registration extends Component {
@@ -19,7 +18,7 @@ class Registration extends Component {
         fields: {
             firstName: {
                 type: 'text',
-                value: 'd',
+                value: '',
                 label: 'First name',
                 isTouched: false,
                 isValid: false,
@@ -31,7 +30,7 @@ class Registration extends Component {
             },
             lastName: {
                 type: 'text',
-                value: 'd',
+                value: '',
                 label: 'Last name',
                 isTouched: false,
                 isValid: false,
@@ -43,7 +42,7 @@ class Registration extends Component {
             },
             position: {
                 type: 'text',
-                value: 'd',
+                value: '',
                 label: 'Position',
                 isTouched: false,
                 isValid: false,
@@ -55,7 +54,7 @@ class Registration extends Component {
             },
             email: {
                 type: 'email',
-                value: 'qwe@mail.r',
+                value: '',
                 label: 'Email',
                 isTouched: false,
                 isValid: false,
@@ -68,7 +67,7 @@ class Registration extends Component {
             },
             password: {
                 type: 'password',
-                value: 'qwer1234T',
+                value: '',
                 label: 'Password',
                 isTouched: false,
                 isValid: false,
