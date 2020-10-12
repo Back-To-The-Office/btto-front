@@ -1,0 +1,24 @@
+* {
+    font-family: 'Roboto', sans-sarif;
+    margin: 0;
+    padding: 0;
+    width: auto;
+}
+
+section {
+    position: relative;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 60px;
+    @media screen and (max-width: 1280px) {
+        padding: 0 30px;
+    }
+}

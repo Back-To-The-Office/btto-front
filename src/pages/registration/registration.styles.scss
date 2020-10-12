@@ -1,0 +1,68 @@
+.registration {
+    padding: 80px 0;
+    @media screen and (max-width: 960px) {
+        padding-top: 20px;
+    }
+}
+
+.registration-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 160px;
+    @media screen and (max-width: 1280px) {
+        padding: 0 80px;
+    }
+    @media screen and (max-width: 960px) {
+        flex-direction: column;
+    }
+}
+
+.registration-content__left {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    min-width: 310px;
+    padding-right: 20px;
+    order: 1;
+    @media screen and (max-width: 960px) {
+        order: 2;
+    }
+    .section-header {
+        margin-bottom: 56px;
+    }
+    .MuiFormControl-root {
+        margin-bottom: 25px;
+        max-width: 310px;
+        width: 100%;
+        &:last-of-type {
+            margin-bottom: 62px;
+        }
+    }
+}
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    &>.MuiButtonBase-root {
+        border: 2px solid #00E676;
+        color: #444444;
+        font-size: 14px;
+        max-width: 310px;
+        padding: 10px 0;
+    }
+}
+
+
+.registration-content__right {
+    width: 57%;
+    display: flex;
+    justify-content: flex-end;
+    order: 2;
+    min-width: 340px;
+    @media screen and (max-width: 960px) {
+        order: 1;
+        max-width: 400px;
+        width: 100%;
+    }
+}

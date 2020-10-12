@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Fragment, useEffect} from 'react';
+import Registration from './pages/registration/registration.component';
+import Header from './components/header/header.component';
+import { Switch, Route } from 'react-router-dom';
+import MainPage from './pages/MainPage/MainPage';
+import { autoLogin } from './redux/auth/auth.actions';
+import { useDispatch } from 'react-redux';
+import Verification from './pages/verification/verification.component';
+import Workspace from './pages/workspace/workspace.component';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        dispatch(autoLogin());
+    }, []);
+
+    return (
+        <Fragment>
+            <Switch>
+                <Route path='/workspace' component={Workspace} />
+                <Route path='/registration' component={Registration} />
+                <Route path='/verification' component={Verification} />
+            </Switch>
+        </Fragment>
+    )
 }
 
 export default App;
