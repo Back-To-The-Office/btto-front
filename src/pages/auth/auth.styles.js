@@ -1,11 +1,14 @@
-.registration {
+import styled from 'styled-components';
+import { SectionHeader } from '../../common-styles/headers/headers.styles';
+
+export const AuthSection = styled.section`
     padding: 80px 0;
     @media screen and (max-width: 960px) {
         padding-top: 20px;
     }
-}
+`;
 
-.registration-content {
+export const AuthContent = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,9 +19,9 @@
     @media screen and (max-width: 960px) {
         flex-direction: column;
     }
-}
+`;
 
-.registration-content__left {
+export const AuthContentLeft = styled.div`
     display: flex;
     flex-direction: column;
     width: 40%;
@@ -28,33 +31,20 @@
     @media screen and (max-width: 960px) {
         order: 2;
     }
-    .section-header {
-        margin-bottom: 56px;
-    }
-    .MuiFormControl-root {
-        margin-bottom: 25px;
-        max-width: 310px;
-        width: 100%;
-        &:last-of-type {
-            margin-bottom: 62px;
-        }
-    }
-}
+`;
 
-.registration-form {
+export const AuthSectionHeader = styled(SectionHeader)`
+    margin-bottom: 56px;
+    font-size: 3rem;
+    font-weight: normal;
+`;
+
+export const AuthForm = styled.form`
     display: flex;
     flex-direction: column;
-    &>.MuiButtonBase-root {
-        border: 2px solid #00E676;
-        color: #444444;
-        font-size: 14px;
-        max-width: 310px;
-        padding: 10px 0;
-    }
-}
+`;
 
-
-.registration-content__right {
+export const AuthContentRight = styled.div`
     width: 57%;
     display: flex;
     justify-content: flex-end;
@@ -65,4 +55,4 @@
         max-width: 400px;
         width: 100%;
     }
-}
+`;
