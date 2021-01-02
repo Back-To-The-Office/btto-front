@@ -1,35 +1,37 @@
 import React from 'react';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
 import { Avatar, makeStyles } from '@material-ui/core';
 import StyledBadge from '../styled-badge/styled-badge.component';
-import { AvatarWrapper } from '../../../common-styles/wrappers/wrappers.styles';
-import { UserHeader, UserSubHeader } from '../../../common-styles/headers/headers.styles';
 
 const useStyles = makeStyles({
-    root: {
+    default: {
         width: 70,
         height: 70
     }
 })
 
-const UserAvatar = ( { user } ) => {
-    const { name, role, img, isOnline } = user;
+const UserAvatar = ({ src, isOnline, className = {} }) => {
     const classes = useStyles();
-    return (
-        <AvatarWrapper>
-            <StyledBadge
-                invisible={!isOnline}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right'
-                }}
-                overlap='circle'
-            >
-                <Avatar src={img} className={classes.root} />
-            </StyledBadge>
-            <UserHeader>{name}</UserHeader>
-            <UserSubHeader>{role}</UserSubHeader>
-        </AvatarWrapper>
-    )
-}
 
-export default UserAvatar
+    return (
+        <StyledBadge
+            invisible={!isOnline}
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right'
+            }}
+            overlap='circle'
+        >
+            <Avatar src={src} className={clsx(classes.default, className)} />
+        </StyledBadge>
+    );
+};
+
+UserAvatar.propTypes = {
+    src: PropTypes.string,
+    isOnline: PropTypes.bool,
+    className: PropTypes.object
+} 
+
+export default UserAvatar;

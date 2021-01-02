@@ -5,6 +5,7 @@ import { TeamPageContent } from './team.styles';
 import TimezoneSection from './sections/timezones/timezones.section';
 import { marvel } from '../../placeholder';
 import LoadingSpinner from '../../assets/loading-spinner/spinner.component';
+import UserCard from '../../components/user-card/user-card.component';
 
 class TeamPage extends Component {
     state = {
@@ -38,6 +39,7 @@ class TeamPage extends Component {
                     <Fragment>
                         <Team teamName={name} members={members} />
                         <TimezoneSection usersObject={members} />
+                        <UserCard />
                     </Fragment>
                 }
             </TeamPageContent>
