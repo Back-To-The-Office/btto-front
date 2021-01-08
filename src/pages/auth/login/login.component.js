@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { TextField, Button, Snackbar, makeStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import defaultModel from './model';
@@ -12,6 +13,7 @@ import { AuthSection, AuthContent, AuthSectionHeader, AuthForm, AuthContentLeft,
 import { mapFieldProperties } from '../mappers/fieldsMapper';
 import validationService from '../services/validationService';
 import { loginUser } from '../services/addressService';
+import { auth } from '../../../redux/auth/auth.actions';
 
 const useStyles = makeStyles({
     button: {
@@ -32,6 +34,7 @@ const Login = () => {
     const [isFormValid, toggleFormValidation] = useState(false);
     const [fields, changeFields] = useState({ ...defaultModel });
     const [alert, changeAlert] = useState({isDisplay: false, message: '', type: 'success'});
+    const dispatch = useDispatch();
 
     const classes = useStyles();
 
@@ -66,12 +69,12 @@ const Login = () => {
         toggleFormValidation(formValidationState);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         try {
-            throw new Error();
-            const data = loginUser({...fields});
+            const data = await loginUser({...fields});
+            dispatch(auth(data));
         } catch (error) {
-            changeAlert({isDisplay: true, message: 'Server is not available at this time. Please try again later.', type: 'error'});
+            changeAlert({isDisplay: true, message: error.message, type: 'error'});
         }
     };
 
