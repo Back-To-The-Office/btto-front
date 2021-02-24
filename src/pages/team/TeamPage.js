@@ -1,11 +1,20 @@
 import React, { Component, Fragment } from 'react';
-import { withRouter } from 'react-router-dom';
-import Team from './sections/team/team.section';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+import Team from './sections/team/TeamSection';
 import { TeamPageContent } from './team.styles';
 import TimezoneSection from './sections/timezones/timezones.section';
 import { marvel } from '../../placeholder';
 import LoadingSpinner from '../../assets/loading-spinner/spinner.component';
 import UserCard from '../../components/user-card/user-card.component';
+// import User from '../../types/user';
+
+// interface TeamPageState {
+//     companyId: number,
+//     id: number,
+//     ownerId: number,
+//     participantsIds: Array<number>,
+//     isLoading: boolean;
+// }
 
 class TeamPage extends Component {
     state = {
