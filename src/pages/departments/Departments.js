@@ -1,6 +1,25 @@
 import React from 'react';
-import { TextField, Button, Radio, RadioGroup, FormControlLabel } from '@material-ui/core';
+import {
+    TextField, Button, Radio, RadioGroup, FormControlLabel
+} from '@material-ui/core';
+import { DepartmentsContainer, DepartmentsControlsSection, DepartmentsListSection } from './Department.styles';
+import DepartmentControl from './components/DepartmentControl/DepartmentControl';
 import DepartmentController from '../../controllers/Department/departmentController';
+
+const teamsExample = [
+    {
+        name: `Development`,
+        id: 14214
+    },
+    {
+        name: `Biz`,
+        id: 12412
+    },
+    {
+        name: `Design`,
+        id: 4124124
+    }
+]
 
 const Departments = () => {
     const [teams, updateDepartments] = React.useState([]);
@@ -29,60 +48,56 @@ const Departments = () => {
         }
     };
 
-    return <div>
-        <div>
-            <h1>Edit team</h1>
-            <TextField
+
+    return <DepartmentsContainer>
+        <DepartmentsControlsSection>
+            <DepartmentControl
                 value={departmentName}
-                label="Team name"
-                required
-                variant="outlined"
+                label={`Department name`}
+                name={`Edit department`}
                 onChange={event => changeName(event.target.value)}
-            />
-            <Button
+            >
+                <Button
                 variant="outlined"
                 disabled={!!!departmentName}
                 onClick={onCreateDepartment}
-            >
-                Create team
-            </Button>
-            <Button
-                variant="outlined"
-                disabled={!!!departmentName}
-                onClick={onEditDepartment}
-            >
-                Edit team
-            </Button>
-        </div>
-        <div>
-            <h1>Pick Team</h1>
-            <RadioGroup name="pickedDepartment" value={pickedDepartment} onChange={event => pickDepartment(event.target.value)}>
-                {teams.map(team => <FormControlLabel value={team.id} control={<Radio />} label={team.name} />)}
-            </RadioGroup>
-        </div>
-        <div>
-            <h1>Change participants</h1>
-            <TextField
+                >
+                    Create department
+                </Button>
+                <Button
+                    variant="outlined"
+                    disabled={!!!departmentName}
+                    onClick={onEditDepartment}
+                >
+                    Edit department
+                </Button>
+            </DepartmentControl>
+            <DepartmentControl
                 value={participantEmail}
                 label="Participant Name"
-                required
-                variant="outlined"
+                name={`Change participant`}
                 onChange={event => changeParticipantEmail(event.target.value)}
-            />
-            <Button
-                variant="outlined"
-                disabled={!!!participantEmail}
             >
-                Add participant
-            </Button>
-            <Button
-                variant="outlined"
-                disabled={!!!participantEmail}
-            >
-                Remove participant
-            </Button>
-        </div>
-    </div>;
+                <Button
+                    variant="outlined"
+                    disabled={!!!participantEmail}
+                >
+                    Add participant
+                </Button>
+                <Button
+                    variant="outlined"
+                    disabled={!!!participantEmail}
+                >
+                    Remove participant
+                </Button>
+            </DepartmentControl>
+        </DepartmentsControlsSection>
+        <DepartmentsListSection>
+            <RadioGroup name="pickedDepartment" value={pickedDepartment} onChange={event => pickDepartment(event.target.value)}>
+                {teamsExample.map(team => <FormControlLabel value={team.id} control={<Radio />} label={team.name} />)}
+            </RadioGroup>
+        </DepartmentsListSection>
+    </DepartmentsContainer>;
 };
 
 export default Departments;

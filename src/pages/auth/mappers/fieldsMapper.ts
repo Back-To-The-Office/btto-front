@@ -1,4 +1,6 @@
-export const mapFieldProperties = field => {
+import { FieldProperties, FieldData } from '../interfaces';
+
+export const mapFieldProperties = (field: FieldData): FieldProperties => {
     const { type, value, placeholder, validation, isValid, isTouched, label, errorMessage } = field;
     return {
         type,

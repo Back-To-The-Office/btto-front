@@ -1,4 +1,6 @@
-export default {
+import { LoginModel } from '../interfaces';
+
+export const defaultModel: LoginModel = {
     email: {
         type: 'email',
         value: '',
@@ -24,4 +26,6 @@ export default {
             isRequired: true
         }
     }
-}
+};
+
+export default defaultModel;

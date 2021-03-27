@@ -12,14 +12,12 @@ class AuthController {
     static CLIENT_ID: string = REACT_APP_CLIENT_ID;
     static CLIENT_SECRET: string = REACT_APP_CLIENT_SECRET;
 
-    register = async (data: AuthData): Promise<AxiosResponse<any>> => {
+    register = async (data: AuthData): Promise<void> => {
         const { PROTOCOL, BTTO_HOST } = AuthController;
         const url: string = `${PROTOCOL}${BTTO_HOST}/api/v1/users/register`;
         const response: AxiosResponse = await axios.post(url, data);
 
         handleResponseStatusCode(response);
-
-        return response;
     }
 
     login = async (data: URLSearchParams): Promise<AxiosResponse<any>> => {

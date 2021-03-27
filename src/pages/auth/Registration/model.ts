@@ -1,4 +1,6 @@
-export default {
+import { RegistrationModel } from '../interfaces';
+
+export const defaultModel: RegistrationModel = {
     firstName: {
         type: 'text',
         value: '',
@@ -57,8 +59,10 @@ export default {
         placeholder: '',
         errorMessage: 'The password should be 6 to 20 characters long, must contain uppercase and lowercase letters and numbers.',
         validation: {
-            isRequired: true, 
+            isRequired: true,
             isPassword: true
         }
     }
 }
+
+export default defaultModel;

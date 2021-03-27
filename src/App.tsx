@@ -1,6 +1,6 @@
 import React from 'react';
-import Registration from './pages/auth/registration/registration.component';
-import Login from './pages/auth/login/login.component';
+import Registration from './pages/auth/Registration';
+import Login from './pages/auth/Login';
 // import Header from './components/header/header.component';
 import { Switch, Route } from 'react-router-dom';
 // import MainPage from './pages/MainPage/MainPage';
@@ -12,7 +12,7 @@ import Departments from './pages/departments/Departments';
 
 const App: React.FC = () => {
     const dispatch = useDispatch();
-    
+
     React.useEffect(() => {
         dispatch(autoLogin());
     }, []);
