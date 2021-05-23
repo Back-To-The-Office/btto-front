@@ -1,17 +1,18 @@
 import { AxiosResponse } from 'axios';
 import Api from '../Api/ApiController';
 import {
-    CreateDepartmentDataRequest, CreateDepartmentDataResponse, EditDepartmentDataRequest, DepartmentInterface, EditParticipantDataRequest
+    CreateDepartmentDataRequest, CreateDepartmentDataResponse, EditDepartmentDataRequest, EditParticipantDataRequest
 } from './interfaces/interfaces';
+import { DepartmentInterface } from '../../interfaces/department';
 
 interface DepartmentsControllerInterface {
-    create(name: string): object,
-    edit(id: number, name: string): object,
-    deleteDepartment(id: number): object,
-    getDepartment(id: number): object,
-    getAllDepartments(): object,
-    addParticipant(departmentId: number, participantId: number): object,
-    removeParticipant(departmentId: number, participantId: number): object
+    create(name: string): Promise<CreateDepartmentDataResponse>,
+    edit(id: number, name: string): Promise<DepartmentInterface>,
+    deleteDepartment(id: number): Promise<void>,
+    getDepartment(id: number): Promise<DepartmentInterface>,
+    getAllDepartments(): Promise<Array<DepartmentInterface>>,
+    addParticipant(departmentId: number, participantId: number): Promise<void>,
+    removeParticipant(departmentId: number, participantId: number): Promise<void>
 }
 
 class DepartmentsController extends Api implements DepartmentsControllerInterface {
@@ -41,7 +42,7 @@ class DepartmentsController extends Api implements DepartmentsControllerInterfac
 
     getDepartment = async (id: number): Promise<DepartmentInterface> => {
         const url = `/api/v1/departments/${id}`;
-        
+
         const response: AxiosResponse<DepartmentInterface> = await this.get(url);
 
         return response.data;

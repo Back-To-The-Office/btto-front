@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    TextField, Button, Radio, RadioGroup, FormControlLabel
+    Button, Radio, RadioGroup, FormControlLabel
 } from '@material-ui/core';
 import { DepartmentsContainer, DepartmentsControlsSection, DepartmentsListSection } from './Department.styles';
 import DepartmentControl from './components/DepartmentControl/DepartmentControl';

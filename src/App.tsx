@@ -8,14 +8,12 @@ import { autoLogin } from './redux/auth/auth.actions';
 import { useDispatch } from 'react-redux';
 import Verification from './pages/verification/verification.component';
 import Workspace from './pages/workspace/Workspace';
-import Departments from './pages/departments/Departments';
+import Departments from './pages/Departments';
 
 const App: React.FC = () => {
     const dispatch = useDispatch();
 
-    React.useEffect(() => {
-        dispatch(autoLogin());
-    }, []);
+    React.useEffect(() => dispatch(autoLogin()), []);
 
     return (
         <React.Fragment>

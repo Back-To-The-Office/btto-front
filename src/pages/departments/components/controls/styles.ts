@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const DepartmentControlContainer = styled.div`
+export const ControlContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
 `;
 
-export const DepartmentControlButtons = styled.div`
+export const ControlButtons = styled.div`
     display: flex;
     justify-content: space-between;
 `;
